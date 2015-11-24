@@ -1,0 +1,35 @@
+'Bubble sort - just numbers
+
+Private Sub btnBubbleSort_Click()
+Dim flag As Boolean
+Dim i As Integer 'i Laufvariable
+i = 1
+
+'zu sortierenden Bereich bestimmen
+Dim n As Range
+Set n = Sheets(1).Range("B4:B17")
+'4 ist jetzt Zeile 1 und B ist jetzt Spalte 2
+
+Dim tmp As Integer 'Zwischenspeicher für Variablen-Tausch
+
+Do
+    flag = False 'wurde was sortiert in diesem Durchgang?
+    For i = 1 To n.Count 'bis B17
+        'Kontrollausgabe:
+        If (IsNumeric(n.Cells(i + 1, 1)) And IsNumeric(n.Cells(i, 1))) Then
+            Debug.Print Str(n.Cells(i + 1, 1).Value) + " < " + Str(n.Cells(i, 1).Value) + " = " + Str(n.Cells(i + 1, 1) < n.Cells(i, 1))
+        End If
+        
+        If n.Cells(i + 1, 1).Value < n.Cells(i, 1).Value Then
+            tmp = n.Cells(i + 1, 1).Value
+            n.Cells(i + 1, 1).Value = n.Cells(i, 1).Value
+            n.Cells(i, 1).Value = tmp
+            flag = True 'es wurde etwas sortiert
+            DoEvents 'Dem Betriebssystem zeit geben, damit es reagieren kann, falls der Algo hängt
+        End If
+    Next i
+    
+Loop Until flag = False 'so lange bis nichts mehr sortiert wird
+
+
+End Sub
